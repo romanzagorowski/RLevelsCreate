@@ -8,12 +8,17 @@ using namespace std::string_literals;
 static const PChar scriptShortName = "RLevelsCreate";
 static const PChar scriptDescription = "Draws R levels for the first order found";
 
+static int maxRLevels = 7;
+
 EXPORT void __stdcall Init()
 {
 	Print("EXPORT void __stdcall Init()");
 
 	ScriptShortName(scriptShortName);
 	ScriptDescription(scriptDescription);
+
+	RegOption("MaxRLevels", ot_Integer, &maxRLevels);
+	SetOptionRange("MaxRLevels", -1, 10);
 }
 
 EXPORT void __stdcall Done()
@@ -60,7 +65,7 @@ EXPORT void __stdcall Execute()
 				std::format("INFO: Execute(): openPrice={}, slPrice={}, oneR={}, orderTicket={}, orderSymbol='{}'", openPrice, slPrice, oneR, orderTicket, orderSymbol)
 			);
 
-			const int timeframe = 10080;
+			const int timeframe = 15;
 
 			if(SetCurrencyAndTimeframe(orderSymbol, 10080))
 			{
@@ -76,10 +81,10 @@ EXPORT void __stdcall Execute()
 				return;
 			}
 
-			for(int i = -1; i < 5; ++i)
+			for(int i = -1; i <= maxRLevels; ++i)
 			{
 				const double price = openPrice + oneR * i;
-				auto objectName = std::format("RLevel_{}_{}", i, orderTicket);
+				auto objectName = std::format("RLevel_{}", i);
 
 				if(ObjectExists(objectName))
 				{
