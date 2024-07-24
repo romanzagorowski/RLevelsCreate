@@ -176,7 +176,7 @@ EXPORT void __stdcall Execute()
 		else
 		{
 			Print(
-				std::format("ERRO: Execute(): ObjectFailed() has failed. i='{}'", i)
+				std::format("ERRO: Execute(): OrderSelect() has failed. i={}", i)
 			);
 		}
 	}
