@@ -150,7 +150,6 @@
     <ClInclude Include="TechnicalFunctions.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DllMain.cpp" />
     <ClCompile Include="RLevelsCreate.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
